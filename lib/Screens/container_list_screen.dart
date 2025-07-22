@@ -3,7 +3,7 @@ import '../Models/container_item.dart';
 import '../Models/container_type.dart';
 import '../Services/container_service.dart';
 import '../Services/container_type_service.dart';
-import '../auth_service.dart';
+import '../Services/auth_service.dart';
 import 'edit_add_container-screen.dart';
 
 class ContainerListScreen extends StatefulWidget {
@@ -178,13 +178,6 @@ class _ContainerListScreenState extends State<ContainerListScreen> {
     final typeInUse = containers.any(
           (c) => c.containerTypeId == container.containerTypeId && c.locationId != container.locationId,
     );
-
-    if (typeInUse) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Bu tip başka bir saklama elemanında da kullanılıyor.')),
-      );
-      return;
-    }
 
     if (hasChildren) {
       ScaffoldMessenger.of(context).showSnackBar(

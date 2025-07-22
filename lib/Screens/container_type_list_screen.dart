@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../Models/container_type.dart';
 import '../Services/container_type_service.dart';
-import '../auth_service.dart';
+import '../Services/auth_service.dart';
 import 'edit_add_container_type_screen.dart';
 
 class ContainerTypeListScreen extends StatefulWidget {

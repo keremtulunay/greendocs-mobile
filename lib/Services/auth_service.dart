@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
-import 'Models/session.dart';
-import 'Screens/main_menu_screen.dart';
+import '../Models/session.dart';
+import '../Screens/main_menu_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:flutter/material.dart';
 class AuthService {

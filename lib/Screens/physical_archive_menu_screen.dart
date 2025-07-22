@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
+import 'package:greendocs_mobile/Screens/qr_scanner_screen.dart';
 import '../Models/container_item.dart';
 import '../Models/container_type.dart';
 import '../Services/container_service.dart';
 import '../Services/container_type_service.dart';
-import '../auth_service.dart';
+import '../Services/auth_service.dart';
 import 'edit_add_container_type_screen.dart';
 import 'container_list_screen.dart';
 import 'container_type_list_screen.dart';
@@ -83,6 +85,19 @@ class PhysicalArchiveMenuScreen extends StatelessWidget {
               debugPrint('New container added: ${newContainer.code}');
             }
           });
+        },
+      ),
+      _MenuItem(
+        icon: Icons.qr_code_scanner,
+        label: 'QR ile Tara',
+        onTap: () async {
+          final result = await Navigator.push(
+            context,
+            MaterialPageRoute(builder: (_) => const QRScannerScreen()),
+          );
+          if (result != null) {
+            // TODO: Use `result` (barcode) to find matching container
+          }
         },
       ),
     ];

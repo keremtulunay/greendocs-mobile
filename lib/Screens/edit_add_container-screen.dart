@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../Models/container_item.dart';
 import '../Models/container_type.dart';
 import '../Services/container_service.dart';
-import '../auth_service.dart';
+import '../Services/auth_service.dart';
 
 class EditAddContainerScreen extends StatefulWidget {
   final ContainerItem? container; // null if adding new
@@ -368,12 +368,30 @@ class _EditAddContainerScreenState extends State<EditAddContainerScreen> {
                     );
                   }).toList(),
                 ],
-                onChanged: (newLocation) => setState(() {
-                  _selectedLocation = newLocation;
-                  _selectedType = null;
-                  _cachedValidTypes = []; // clear cache so dropdown updates
-                  _lastParentIdForTypes = null;
-                }),
+                onChanged: (newLocation) {
+                  setState(() {
+                    _selectedLocation = newLocation;
+                    _cachedValidTypes = []; // clear cache so dropdown updates
+                    _lastParentIdForTypes = null;
+
+                    // If editing and original type exists in new valid types, keep it
+                    if (_isEditing && widget.container != null) {
+                      final originalTypeId = widget.container!.containerTypeId;
+                      final validTypes = getValidTypes();
+
+                      final originalTypeStillValid = validTypes.any((t) => t.id == originalTypeId);
+                      if (originalTypeStillValid) {
+                        _selectedType = validTypes.firstWhere((t) => t.id == originalTypeId);
+                      } else {
+                        _selectedType = null;
+                      }
+                    } else {
+                      // If not editing, clear selection
+                      _selectedType = null;
+                    }
+                  });
+                },
+
                 validator: (_) => null, // optional, no validation needed
               ),
 
